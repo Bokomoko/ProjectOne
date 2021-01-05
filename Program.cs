@@ -34,12 +34,7 @@ namespace ProjectOne
 
           case "3":
             // show average student score
-            decimal sum = 0;
-            for (int i = 0; i < nextStudent; i++)
-            {
-              sum += studentRoll[i].score;
-            }
-            Console.WriteLine($"\nAverage score is {sum / nextStudent}\n");
+            CalcAverage(studentRoll, nextStudent);
             break;
 
           default:
@@ -52,6 +47,21 @@ namespace ProjectOne
 
     }
 
+    private static void CalcAverage(Student[] studentRoll, int nextStudent)
+    {
+      decimal sum = 0;
+      for (int i = 0; i < nextStudent; i++)
+      {
+        sum += studentRoll[i].score;
+      }
+      decimal averageScore = sum / nextStudent;
+      int myInt = (int)(1 + averageScore / 2);
+      GradeEnum averageRank = (GradeEnum)(6 - myInt);
+      Console.WriteLine($"\nAverage score is {sum / nextStudent}");
+      Console.WriteLine($"The rank is {averageRank}");
+
+    }
+
     private static string obtainChoice()
     {
       Console.WriteLine("Choose option bellow");
@@ -59,8 +69,8 @@ namespace ProjectOne
       Console.WriteLine("2-List students");
       Console.WriteLine("3-Show average score\n");
       Console.WriteLine("Enter- to exit\n");
-      string option = Console.ReadLine();
-      return option;
+      string localOption = Console.ReadLine();
+      return localOption;
     }
   }
 }
